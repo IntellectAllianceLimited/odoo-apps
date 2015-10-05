@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    
+    <!-- Tool Types -->
+    <!-- Tool Types Form View -->
+    <record model="ir.ui.view" id="view_ia_tool_type_form">
+      <field name="name">ia.tool.type.form</field>
+      <field name="model">ia.tool.type</field>
+      <field name="arch" type="xml">
+        <form string="Tool Type">
+          <group>
+            <field name="tt_name"/>
+            <field name="tt_description"/>
+            <field name="tt_parent_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tool Types Tree View -->
+    <record model="ir.ui.view" id="view_ia_tool_type_tree">
+      <field name="name">ia.tool.type.tree</field>
+      <field name="model">ia.tool.type</field>
+      <field name="arch" type="xml">
+        <tree string="Tool Types">
+            <field name="tt_name"/>
+            <field name="tt_parent_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tool Types Action -->
+    <record model="ir.actions.act_window" id="action_ia_tool_type">
+        <field name="name">Manage Tool Types</field>
+        <field name="res_model">ia.tool.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Tool Request -->
+    <!-- Tool Request Form View -->
+    <record model="ir.ui.view" id="view_ia_tool_request_form">
+      <field name="name">ia.tool.request.form</field>
+      <field name="model">ia.tool.request</field>
+      <field name="arch" type="xml">
+        <form string="Tool Request">
+            <header>
+              <button icon="gtk-yes" name="action_approve_request" string="Approve Request" class="oe_highlight"
+                  groups="base.group_user" attrs="{'invisible':[('tr_state','!=','pending')]}"/>
+            </header>
+            <sheet>
+                <group>
+                    <field name="tr_code"/>
+                    <field name="tr_requester"/>
+                    <field name="tr_tool"/>
+                    <field name="tr_date"/>
+                    <field name="tr_state"/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tool Request Tree View -->
+    <record model="ir.ui.view" id="view_ia_tool_request_tree">
+      <field name="name">ia.tool.request.tree</field>
+      <field name="model">ia.tool.request</field>
+      <field name="arch" type="xml">
+        <tree string="Tool Requests">
+            <field name="tr_code"/>
+            <field name="tr_requester"/>
+            <field name="tr_tool"/>
+            <field name="tr_date"/>
+            <field name="tr_state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tool Request Action -->
+    <record model="ir.actions.act_window" id="action_ia_tool_request">
+        <field name="name">Manage Tools</field>
+        <field name="res_model">ia.tool.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Tool -->
+    <!-- Tool Form View -->
+    <record model="ir.ui.view" id="view_ia_tool_form">
+      <field name="name">ia.tool.tool.form</field>
+      <field name="model">ia.tool.tool</field>
+      <field name="arch" type="xml">
+        <form string="Tool">
+            <sheet>
+                <group>
+                    <field name="tool_name"/>
+                    <field name="tool_code"/>
+                    <field name="tool_desc"/>
+                    <field name="tool_available"/>
+                    <field name="tool_type"/>
+                    <field name="tool_product"/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tool Tree View -->
+    <record model="ir.ui.view" id="view_ia_tool_tree">
+      <field name="name">ia.tool.tool.tree</field>
+      <field name="model">ia.tool.tool</field>
+      <field name="arch" type="xml">
+        <tree string="Tools">
+            <field name="tool_code"/>
+            <field name="tool_name"/>
+            <field name="tool_type"/>
+            <field name="tool_available"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tool Action -->
+    <record model="ir.actions.act_window" id="action_ia_tool">
+        <field name="name">Manage Tools</field>
+        <field name="res_model">ia.tool.tool</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Tool Lease -->
+    <!-- Tool Lease Form View -->
+    <record model="ir.ui.view" id="view_ia_tool_lease_form">
+      <field name="name">ia.tool.lease.form</field>
+      <field name="model">ia.tool.lease</field>
+      <field name="arch" type="xml">
+        <form string="Tool Lease">
+            <sheet>
+                <group string="Basic Information">
+                  <field name="lease_code"/>
+                  <field name="lease_responsible"/>
+                  <field name="lease_project"/>
+                  <field name="lease_tool"/>
+                </group>
+                <notebook>
+                  <page string="Status" name="status">
+                      <group>
+                          <field name="lease_date"/>
+                          <field name="lease_due"/>
+                          <field name="lease_state"/>
+                      </group>
+                  </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tool Lease Tree View -->
+    <record model="ir.ui.view" id="view_ia_tool_lease_tree">
+      <field name="name">ia.tool.lease.tree</field>
+      <field name="model">ia.tool.lease</field>
+      <field name="arch" type="xml">
+        <tree string="Tool Leases">
+            <field name="lease_code"/>
+            <field name="lease_date"/>
+            <field name="lease_due"/>
+            <field name="lease_responsible"/>
+            <field name="lease_project"/>
+            <field name="lease_tool"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tool Lease Action -->
+    <record model="ir.actions.act_window" id="action_ia_tool_lease">
+        <field name="name">Manage Tool Leases</field>
+        <field name="res_model">ia.tool.lease</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- setup the menus -->
+    <menuitem name="Equipment" id="menu_ia_tool" sequence="60" />
+    <menuitem name="Tools" id="menu_ia_tool_tool" parent="menu_ia_tool"/>
+    <menuitem name="Manage Tools" id="menu_ia_tool_tools" parent="menu_ia_tool_tool" action="action_ia_tool"/>
+    <menuitem name="Configuration" id="menu_ia_tool_config" parent="menu_ia_tool"/>
+    <menuitem name="Tool Types" id="menu_ia_tool_types" parent="menu_ia_tool_config" action="action_ia_tool_type"/>
+    <menuitem name="Tool Requests" id="menu_ia_tool_requests" parent="menu_ia_tool_tool" action="action_ia_tool_request"/>
+    <menuitem name="Tool Leases" id="menu_ia_tool_leases" parent="menu_ia_tool_tool" action="action_ia_tool_lease"/>
+  </data>
+</openerp>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    
+    <!-- Tender Types -->
+    <!-- Tender Types Form View -->
+    <record model="ir.ui.view" id="view_ia_tender_type_form">
+      <field name="name">ia.tender.type.form</field>
+      <field name="model">ia.tender.type</field>
+      <field name="arch" type="xml">
+        <form string="Tender Type">
+          <group>
+            <field name="tt_name"/>
+            <field name="tt_description"/>
+            <field name="tt_parent_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tender Types Tree View -->
+    <record model="ir.ui.view" id="view_ia_tender_type_tree">
+      <field name="name">ia.tender.type.tree</field>
+      <field name="model">ia.tender.type</field>
+      <field name="arch" type="xml">
+        <tree string="Tender Types">
+            <field name="tt_name"/>
+            <field name="tt_parent_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tender Types Action -->
+    <record model="ir.actions.act_window" id="action_ia_tender_type">
+        <field name="name">Manage Tender Types</field>
+        <field name="res_model">ia.tender.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Tender Activities -->
+    <!-- Tender Activities Form View -->
+    <record model="ir.ui.view" id="view_ia_tender_activity_form">
+      <field name="name">ia.tender.activity.form</field>
+      <field name="model">ia.tender.activity</field>
+      <field name="arch" type="xml">
+        <form string="Tender Activity">
+          <group>
+            <field name="ta_name"/>
+            <field name="ta_tender"/>
+            <field name="ta_description"/>
+            <field name="ta_date"/>
+            <field name="ta_resolutions"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tender Activities Tree View -->
+    <record model="ir.ui.view" id="view_ia_tender_activity_tree">
+      <field name="name">ia.tender.activity.tree</field>
+      <field name="model">ia.tender.activity</field>
+      <field name="arch" type="xml">
+        <tree string="Tender Activities">
+            <field name="ta_name"/>
+            <field name="ta_tender"/>
+            <field name="ta_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tender Activities Action -->
+    <record model="ir.actions.act_window" id="action_ia_tender_activity">
+        <field name="name">Manage Tender Activities</field>
+        <field name="res_model">ia.tender.activity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Extend document record for tender -->
+    <record model="ir.ui.view" id="view_document_form_inherit">
+        <field name="name">ir.attachment.inherit</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="document.view_document_file_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="tender_id"/>
+            </field>
+        </field>
+    </record>
+    
+    <!-- Extend sale order for tender -->
+    <record model="ir.ui.view" id="view_order_form_inherit">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <group name="sales_person" position="after">
+                <group name="tender_info">
+                    <field name="tender_id"/>
+                </group>
+            </group>
+        </field>
+    </record>
+        
+    <!-- Tender -->
+    <!-- Tender Form View -->
+    <record model="ir.ui.view" id="view_ia_tender_form">
+      <field name="name">ia.tender.tender.form</field>
+      <field name="model">ia.tender.tender</field>
+      <field name="arch" type="xml">
+        <form string="Tender">
+          <group string="Basic Information">
+            <field name="tender_code"/>
+            <field name="tender_title"/>
+            <field name="tender_desc"/>
+            <field name="tender_expiry"/>
+            <field name="tender_responsible"/>
+            <field name="tender_fee"/>
+            <field name="tender_type"/>
+          </group>
+          <notebook>
+            <page string="Status" name="status">
+                <group>
+                    <field name="tender_results"/>
+                    <field name="tender_state"/>
+                    <field name="tender_punctual"/>
+                </group>
+            </page>
+            <page string="Documents" name="docs">
+                <field name="tender_documents"/>
+            </page>
+            <page string="Sales" name="docs">
+                <field name="tender_quotes"/>
+            </page>
+            <page string="Activity" name="docs">
+                <field name="tender_activities"/>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <!-- Tender Tree View -->
+    <record model="ir.ui.view" id="view_ia_tender_tree">
+      <field name="name">ia.tender.tender.tree</field>
+      <field name="model">ia.tender.tender</field>
+      <field name="arch" type="xml">
+        <tree string="Tenders">
+            <field name="tender_code"/>
+            <field name="tender_title"/>
+            <field name="tender_expiry"/>
+            <field name="tender_type"/>
+            <field name="tender_responsible"/>
+            <field name="tender_results"/>
+            <field name="tender_state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Tender Action -->
+    <record model="ir.actions.act_window" id="action_ia_tender">
+        <field name="name">Manage Tenders</field>
+        <field name="res_model">ia.tender.tender</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- setup the menus -->
+    <menuitem name="Tenders" id="menu_ia_tender" sequence="60" />
+    <menuitem name="Tenders" id="menu_ia_tender_tender" parent="menu_ia_tender"/>
+    <menuitem name="Manage Tenders" id="menu_ia_tender_tenders" parent="menu_ia_tender_tender" action="action_ia_tender"/>
+    <menuitem name="Configuration" id="menu_ia_tender_config" parent="menu_ia_tender"/>
+    <menuitem name="Tender Types" id="menu_ia_tender_types" parent="menu_ia_tender_config" action="action_ia_tender_type"/>
+    <menuitem name="Tender Activity" id="menu_ia_tender_activity" parent="menu_ia_tender_tender" action="action_ia_tender_activity"/>
+  </data>
+</openerp>
