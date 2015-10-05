@@ -27,7 +27,7 @@
     'description': """
 The base module to manage equipment leasing.
 ======================================================
-Developed for Servtel Solutions Limited
+Developed for Odoo App Store
 """,
     'author': 'Intellect Alliance Limited',
     'website': 'http://www.intellectalliance.com',
@@ -39,6 +39,8 @@ Developed for Servtel Solutions Limited
     'test':[],
     'installable': True,
     'application': True,
-    'images': [],
+    'images': ['static/images/main_screenshot.png'],
+    'currency': 'USD',
+    'price': 100.00,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
